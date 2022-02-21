@@ -20,12 +20,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import pages.LocationPopupPage;
+import pages.LoginPage;
 
 public class BasicTest {
 
 	WebDriver driver;
 	Actions action;
 	LocationPopupPage locPP;
+	LoginPage loginP;
 
 	@BeforeMethod
 	public void beforeMethod() {
@@ -34,6 +36,7 @@ public class BasicTest {
 		driver = new ChromeDriver();
 		action = new Actions(driver);
 		locPP = new LocationPopupPage(driver);
+		loginP = new LoginPage(driver);
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
@@ -50,6 +53,7 @@ public class BasicTest {
 		   locPP.openLocationHeader();
 		   locPP.setLocation("Helderberg - Albany");
 		
+		   loginP.login("Zaba", "Zabljarski");
 	}
 
 
