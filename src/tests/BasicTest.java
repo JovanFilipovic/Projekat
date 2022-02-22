@@ -21,6 +21,8 @@ import org.testng.annotations.Test;
 
 import pages.LocationPopupPage;
 import pages.LoginPage;
+import pages.NotificationSystemPage;
+import pages.ProfilePage;
 
 public class BasicTest {
 
@@ -28,6 +30,9 @@ public class BasicTest {
 	Actions action;
 	LocationPopupPage locPP;
 	LoginPage loginP;
+	ProfilePage profileP;
+	NotificationSystemPage notiSP;
+	JavascriptExecutor js;
 
 	@BeforeMethod
 	public void beforeMethod() {
@@ -37,6 +42,9 @@ public class BasicTest {
 		action = new Actions(driver);
 		locPP = new LocationPopupPage(driver);
 		loginP = new LoginPage(driver);
+		profileP = new ProfilePage(driver);
+		notiSP = new NotificationSystemPage(driver);
+		js = (JavascriptExecutor) driver;
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
@@ -47,13 +55,27 @@ public class BasicTest {
 	}
 
 	@Test(enabled = true)
-	public void searchTableTest() throws Exception {
+	public void demoTest() throws Exception {
 
 		   locPP.closeJumpDialog();
 		   locPP.openLocationHeader();
 		   locPP.setLocation("Helderberg - Albany");
 		
-		   loginP.login("Zaba", "Zabljarski");
+		   loginP.login("", "");
+		   
+		   driver.navigate().to("http://demo.yo-meals.com/member/profile");
+		   
+		   
+		   profileP.uploadProfilePhoto("C:\\Users\\anast\\Desktop\\LikX.png");
+		   
+		   System.out.println(notiSP.getMessageText(notiSP.getMessageElement()));
+		 
+		   Thread.sleep(3000);
+		   
+		   profileP.removeProfilePhoto();
+		   
+		   notiSP.waitMessageToDisaper();
+		   driver.navigate().refresh();
 	}
 
 

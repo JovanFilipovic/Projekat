@@ -34,9 +34,9 @@ public class LoginPage extends BasicPage{
 	public void login(String username, String password) {
 		getLoginHeaderButton().click();
 		
-		getUsernameInput().clear();
+		//getUsernameInput().clear();
 		getUsernameInput().sendKeys(username);
-		getPasswordInput().clear();
+	//	getPasswordInput().clear();
 		getPasswordInput().sendKeys(password);
 		//getRememberMeButton().click();
 		getLoginButton().click();
