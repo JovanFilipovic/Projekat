@@ -19,8 +19,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import pages.AuthPage;
+import pages.CartSummaryPage;
 import pages.LocationPopupPage;
 import pages.LoginPage;
+import pages.MealPage;
 import pages.NotificationSystemPage;
 import pages.ProfilePage;
 
@@ -32,6 +35,9 @@ public class BasicTest {
 	LoginPage loginP;
 	ProfilePage profileP;
 	NotificationSystemPage notiSP;
+	AuthPage authP;
+	MealPage mealP;
+	CartSummaryPage cartSumP;
 	JavascriptExecutor js;
 
 	@BeforeMethod
@@ -44,6 +50,9 @@ public class BasicTest {
 		loginP = new LoginPage(driver);
 		profileP = new ProfilePage(driver);
 		notiSP = new NotificationSystemPage(driver);
+		authP = new AuthPage(driver);
+		mealP = new MealPage(driver);
+		cartSumP = new CartSummaryPage(driver);
 		js = (JavascriptExecutor) driver;
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -63,19 +72,19 @@ public class BasicTest {
 		
 		   loginP.login("", "");
 		   
-		   driver.navigate().to("http://demo.yo-meals.com/member/profile");
+		   Thread.sleep(2000);
+		   
+		   driver.navigate().to("http://demo.yo-meals.com/meal/chicken-fried-steak-tostada");
+		   
+		   Thread.sleep(1000);
 		   
 		   
-		   profileP.uploadProfilePhoto("C:\\Users\\anast\\Desktop\\LikX.png");
+		   mealP.addToFavorites();
+		   mealP.addMealToCart("13");
 		   
-		   System.out.println(notiSP.getMessageText(notiSP.getMessageElement()));
-		 
-		   Thread.sleep(3000);
+		   Thread.sleep(1000);
 		   
-		   profileP.removeProfilePhoto();
-		   
-		   notiSP.waitMessageToDisaper();
-		   driver.navigate().refresh();
+		   cartSumP.clearAll();
 	}
 
 
