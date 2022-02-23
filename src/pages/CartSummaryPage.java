@@ -14,7 +14,7 @@ public class CartSummaryPage extends BasicPage{
 		return driver.findElement(By.xpath("//*[contains(@class, 'cart-head')]/a[2]"));
 	}
 	
-	public void clearAll() {
+	public void clearAll() {  // da se klikne ako postoji ili ne postoji 
 		getClearAllButton().click();
 	}
 	

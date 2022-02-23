@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.File;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -14,7 +15,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.v85.runtime.model.TimeDelta;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -27,7 +30,7 @@ import pages.MealPage;
 import pages.NotificationSystemPage;
 import pages.ProfilePage;
 
-public class BasicTest {
+public abstract class BasicTest {
 
 	WebDriver driver;
 	Actions action;
@@ -39,6 +42,10 @@ public class BasicTest {
 	MealPage mealP;
 	CartSummaryPage cartSumP;
 	JavascriptExecutor js;
+
+	String baseUrl;
+	String email;
+	String password;
 
 	@BeforeMethod
 	public void beforeMethod() {
@@ -55,43 +62,30 @@ public class BasicTest {
 		cartSumP = new CartSummaryPage(driver);
 		js = (JavascriptExecutor) driver;
 
+		baseUrl = "http://demo.yo-meals.com/";
+		email = "customer@dummyid.com";
+		password = "12345678a";
+
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 		driver.manage().window().maximize();
-		
-		driver.get("http://demo.yo-meals.com/");
 
 	}
-
-	@Test(enabled = true)
-	public void demoTest() throws Exception {
-
-		   locPP.closeJumpDialog();
-		   locPP.openLocationHeader();
-		   locPP.setLocation("Helderberg - Albany");
-		
-		   loginP.login("", "");
-		   
-		   Thread.sleep(2000);
-		   
-		   driver.navigate().to("http://demo.yo-meals.com/meal/chicken-fried-steak-tostada");
-		   
-		   Thread.sleep(1000);
-		   
-		   
-		   mealP.addToFavorites();
-		   mealP.addMealToCart("13");
-		   
-		   Thread.sleep(1000);
-		   
-		   cartSumP.clearAll();
-	}
-
 
 	@AfterMethod
-	public void afterMethod() throws InterruptedException {
-		Thread.sleep(15000);
+	public void afterMethod(ITestResult result) throws Exception {
+		if (result.getStatus() == ITestResult.FAILURE) {
+			takeSnapShot(driver, "C:\\projekti\\Projekat\\screenshots\\" + java.time.LocalDateTime.now() + ".png");
+		}
+		Thread.sleep(3000);
 		driver.quit();
 	}
 
+	public static void takeSnapShot(WebDriver webdriver, String fileWithPath) throws Exception {
+
+		TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
+		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+		File DestFile = new File(fileWithPath);
+		FileUtils.copyFile(SrcFile, DestFile);
+	}
 }

@@ -31,12 +31,12 @@ public class LoginPage extends BasicPage{
 		return driver.findElement(By.name("remember_me"));
 	}
 	
-	public void login(String username, String password) {
+	public void login(String email, String password) {
 		getLoginHeaderButton().click();
 		
-		//getUsernameInput().clear();
-		getUsernameInput().sendKeys(username);
-	//	getPasswordInput().clear();
+		getUsernameInput().clear();
+		getUsernameInput().sendKeys(email);
+		getPasswordInput().clear();
 		getPasswordInput().sendKeys(password);
 		//getRememberMeButton().click();
 		getLoginButton().click();

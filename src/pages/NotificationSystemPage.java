@@ -20,8 +20,8 @@ public class NotificationSystemPage extends BasicPage {
 		return driver.findElement(By.xpath("//*[contains(@class, 'alert--success')]"));
 	}
 
-	public String getMessageText(WebElement element) {
-		return element.findElement(By.xpath("div")).getText();
+	public String getMessageText() {
+		return getMessageElement().findElement(By.xpath("div")).getText();
 	}
 
 	public void waitMessageToDisaper() {
