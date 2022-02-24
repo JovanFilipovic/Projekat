@@ -1,5 +1,6 @@
 package pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -17,7 +18,7 @@ public class SearchResultPage extends BasicPage{
 	}
 	
 	public List<String> getAllElementsNames(){
-		List<String> listaImena = null;
+		List<String> listaImena = new ArrayList<>();
 		for (int i = 0; i < getSearchResult().size(); i++) {
 			listaImena.add(getSearchResult().get(i).getText());
 		}

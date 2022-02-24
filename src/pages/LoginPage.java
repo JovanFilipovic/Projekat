@@ -32,7 +32,6 @@ public class LoginPage extends BasicPage{
 	}
 	
 	public void login(String email, String password) {
-		getLoginHeaderButton().click();
 		
 		getUsernameInput().clear();
 		getUsernameInput().sendKeys(email);
