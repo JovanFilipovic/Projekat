@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class ProfileTest extends BasicTest {
 
-	@Test(priority = 0, enabled = true)
+	@Test(priority = 0, enabled = false)
 	public void profileEditTest() throws InterruptedException {
 
 		driver.get(this.baseUrl + "guest-user/login-form");

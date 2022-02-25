@@ -43,7 +43,7 @@ public class MealItemTest extends BasicTest {
 		Thread.sleep(2000);
 		driver.navigate().to(baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
 		mealP.addToFavorites();
-		Assert.assertEquals(notiSP.getMessageText().contains("Product has been added to your favorites."), true,
+		Assert.assertEquals(notiSP.getMessageText().contains("Product has been added to your favorites.."), true,
 				"[Error], Unexptected message");
 
 	}

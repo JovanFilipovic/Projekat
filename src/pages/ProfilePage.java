@@ -99,7 +99,7 @@ public class ProfilePage extends BasicPage {
 
 		select = new Select(getCitySelect());
 		select.selectByVisibleText(city);
-		
+
 		getButtonSave().sendKeys(Keys.ENTER);
 
 	}
