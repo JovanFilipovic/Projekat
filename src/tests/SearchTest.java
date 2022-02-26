@@ -33,16 +33,16 @@ public class SearchTest extends BasicTest {
 			driver.get(url);
 			locPP.openLocationHeader();
 			locPP.setLocation(location);
-			Thread.sleep(500);
-
+			
 			for (int j = 0; j < searchResP.searchResultNumber(); j++) {
 				if (sheet.getRow(i).getCell(j + 3) != null) {
 					String resultName = sheet.getRow(i).getCell(j + 3).getStringCellValue();
+					Thread.sleep(500);
 					softAssert.assertEquals(searchResP.getAllElementsNames().get(j).contains(resultName), true,
 							"[Error], result name unexpected");
 				}
 			}
-
+			Thread.sleep(500);
 			softAssert.assertEquals(searchResP.searchResultNumber(), Integer.parseInt(numberOfResults),
 					"[Error], number of results unexpected");
 		}

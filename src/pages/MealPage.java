@@ -20,7 +20,7 @@ public class MealPage extends BasicPage{
 	}
 	
 	public WebElement getQuantityInput() {
-		return driver.findElement(By.name("product_qty"));
+		return driver.findElement(By.xpath("//input[@name='product_qty']"));
 	}
 	
 	public void addMealToCart(String quantity) {
@@ -31,7 +31,6 @@ public class MealPage extends BasicPage{
 	}
 	
 	public void addToFavorites() {
-		if(getAddToCartButton().getCssValue("title") != "Favorite")
 		getAddToFavoritesButton().click();
 	}
 }

@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class ProfileTest extends BasicTest {
 
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0, enabled = true)
 	public void profileEditTest() throws InterruptedException {
 
 		driver.get(this.baseUrl + "guest-user/login-form");
@@ -27,7 +27,7 @@ public class ProfileTest extends BasicTest {
 	}
 
 	@Test(priority = 1, enabled = true)
-	public void changeProfileImageTest() throws IOException {
+	public void changeProfileImageTest() throws IOException, InterruptedException {
 
 		driver.get(baseUrl + "guest-user/login-form");
 		locPP.closeJumpDialog();
@@ -41,6 +41,7 @@ public class ProfileTest extends BasicTest {
 				"[Error], unexpected upload photo message");
 		notiSP.waitMessageToDisaper();
 		profileP.removeProfilePhoto();
+		
 		Assert.assertEquals(notiSP.getMessageText().contains("Profile Image Deleted Successfully"), true,
 				"[Error], unexpected delete photo message");
 		notiSP.waitMessageToDisaper();

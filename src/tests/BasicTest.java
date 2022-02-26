@@ -77,7 +77,7 @@ public abstract class BasicTest {
 		email = "customer@dummyid.com";
 		password = "12345678a";
 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 		driver.manage().window().maximize();
 

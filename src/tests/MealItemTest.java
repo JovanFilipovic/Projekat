@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class MealItemTest extends BasicTest {
 
 	@Test(priority = 0, enabled = true)
-	public void addMealToCartTest() {
+	public void addMealToCartTest() throws InterruptedException {
 
 		driver.get(baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
 		locPP.closeJumpDialog();
@@ -38,18 +38,19 @@ public class MealItemTest extends BasicTest {
 		mealP.addToFavorites();
 		Assert.assertEquals(notiSP.getMessageText().contains("Please login first!"), true,
 				"[Error], Unexpected message");
-		driver.navigate().to(baseUrl + "guest-user/login-form");
+		driver.get(baseUrl + "guest-user/login-form");
 		loginP.login(email, password);
-		Thread.sleep(2000);
-		driver.navigate().to(baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
+		driver.get(baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
 		mealP.addToFavorites();
-		Assert.assertEquals(notiSP.getMessageText().contains("Product has been added to your favorites.."), true,
+		Assert.assertEquals(notiSP.getMessageText().contains("Product has been added to your favorites."), true,
 				"[Error], Unexptected message");
+		Thread.sleep(500);
+		mealP.addToFavorites();
 
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void clearCartTest() throws IOException {
+	public void clearCartTest() throws IOException, InterruptedException {
 
 		driver.get(baseUrl + "meals");
 		locPP.setLocation("City Center - Albany");
@@ -62,7 +63,7 @@ public class MealItemTest extends BasicTest {
 
 		for (int i = 1; i < 6; i++) {
 			String mealUrl = sheet.getRow(i).getCell(0).getStringCellValue();
-			driver.navigate().to(mealUrl);
+			driver.get(mealUrl);
 			mealP.addMealToCart("3");
 			softAssert.assertEquals(notiSP.getMessageText().contains("Meal Added To Cart"), true,
 					"[Error], unexpected message");
